@@ -13,6 +13,12 @@ body {
 	padding:0;
 	margin:0;
 }
+
+body.miku-theme {
+	background-color: #86cecb;
+	background-image:url('leek1.webp'), url('leek2.webp'), url('leek3.webp');
+}
+
 h1 {color:white;font-family:sans-serif;font-size:48pt;text-align:center;}
 
 @keyframes ninefall {
@@ -97,10 +103,44 @@ h1 {color:white;font-family:sans-serif;font-size:48pt;text-align:center;}
 
 <div id="video">
 <p class="baka top"><span>BAKABAKABAKABAKABAKABAKABAKABAKABAKABAKABAKABAKABAKABAKABAKABAKABAKABAKABAKABAKA</span></p>
-<video autoplay loop controls> <source src="video.webm" type="video/webm">BAKABAKABAKABAKABAKABAKABAKABAKA</video>
+<video id="mainVideo" autoplay loop controls> <source src="cirno.webm" type="video/webm">BAKABAKABAKABAKABAKABAKABAKABAKA</video>
 <p class="baka bot"><span>BAKABAKABAKABAKABAKABAKABAKABAKABAKABAKABAKABAKABAKABAKABAKABAKABAKABAKABAKABAKA</span></p>
 </div>
 
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const urlParams = new URLSearchParams(window.location.search);
+    
+    let applyMikuTheme = false;
+
+    if (urlParams.has('miku')) {
+        applyMikuTheme = true;
+    } else if (urlParams.has('cirno')) {
+        applyMikuTheme = false;
+    } else {
+        const today = new Date();
+        const month = today.getMonth();
+        const day = today.getDate();
+        if (month == 7 && day == 31) { //Miku's birthday
+            applyMikuTheme = true;
+        } else if (month == 8 && day == 9) { //Cirno's birthday
+            applyMikuTheme = false;
+        } else {
+            applyMikuTheme = Math.random() < 0.5;
+        }
+    }
+
+    if (applyMikuTheme) {
+        document.body.classList.add('miku-theme');
+
+        const mainVideo = document.getElementById('mainVideo');
+        if (mainVideo) {
+            mainVideo.querySelector('source').src = 'miku.webm';
+            mainVideo.load();
+        }
+    }
+});
+</script>
 
 </body>
 
