@@ -25,13 +25,13 @@ if (isset($_GET['miku'])) {
         $theme = $mikuTheme;
     } elseif ($currentMonth === 9 && $currentDay === 9) {
         $theme = $cirnoTheme;
-    } else {
+    } /* else {
         if (mt_rand(0, 1) === 0) {
             $theme = $mikuTheme;
         } else {
             $theme = $cirnoTheme;
         }
-    }
+    } */
 }
 ?>
 
